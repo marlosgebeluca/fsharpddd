@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="1-presentation/Suave/Config.fs" />
+    <Compile Include="1-presentation/Suave/MainRoutes.fs" />
+    <Compile Include="App.fs" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>
