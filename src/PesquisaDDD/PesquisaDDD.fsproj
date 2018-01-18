@@ -4,10 +4,27 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="0-cross-infra/types/SimpleTypes.fs" />
+    <Compile Include="0-cross-infra/myLib/JsonSerializer.fs" />
+
+    <Compile Include="5-infra/types/EmDoctos.fs" />
+
+    <Compile Include="4-domain/types/EndossoTypes.fs" />
+    <Compile Include="4-domain/types/ApoliceTypes.fs" />
+    <Compile Include="4-domain/helpers/ValidaApoliceHelper.fs" />
+
+    <Compile Include="3-application/validators/ApoliceValidator.fs" />
+    <Compile Include="3-application/adapters/ApoliceAdapter.fs" />
+    <Compile Include="3-application/services/ApoliceService.fs" />
+
     <Compile Include="1-presentation/Suave/Config.fs" />
+    <Compile Include="1-presentation/Suave/ApoliceRoutes.fs" />
     <Compile Include="1-presentation/Suave/MainRoutes.fs" />
     <Compile Include="App.fs" />
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions.dll" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

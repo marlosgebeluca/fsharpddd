@@ -1,11 +1,6 @@
 namespace Apresentacao
 
 open Suave
-open Suave.Filters
-open Suave.Operators
-open Suave.RequestErrors
-open Suave.Json
-open Suave.Successful
 
 module Config =
   let cfg ={ 

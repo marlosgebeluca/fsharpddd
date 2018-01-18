@@ -1,18 +1,13 @@
 namespace Apresentacao
 
 open Suave
-open Suave.Filters
-open Suave.Operators
 open Suave.RequestErrors
-open Suave.Json
-open Suave.Successful
 
+open ApoliceRoutes
 
 module MainRoutes =
   let webPart =
     choose [
-      GET >=> choose [
-        path "/hello" >=> OK "Hello World"
-      ]
+      apoliceRoutes
       NOT_FOUND "Nada Por aqui!" 
     ]
