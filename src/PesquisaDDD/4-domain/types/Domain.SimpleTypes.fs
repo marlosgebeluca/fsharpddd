@@ -1,4 +1,4 @@
-namespace CrossInfra
+namespace Domain
 open System
 
 // Symple Types
@@ -16,12 +16,6 @@ type String60 = String60 of string
 type String100 = String100 of string
 type String200 = String200 of string
 type String400 = String400 of string
-
-type Id = Id of int with
-  static member op_Explicit x = 
-      match x with Id f -> f
-
-type TipoMovto = TipoMovto of String02
 
 module ConstrainedType =
   /// Create a constrained string using the constructor provided
@@ -281,23 +275,3 @@ module String400 =
   let createOption str = 
       ConstrainedType.createStringOption "String400" String400 400 str            
 
-module TipoMovto = 
-    /// Retorna o valor da string dentro de TipoMovto s
-    let value (TipoMovto str) = str
-
-    /// Cria uma TipoMovto
-    /// Retorna o erro se valor da string for null ou vazia
-    let create str =
-        if String.IsNullOrEmpty(str) then
-            let msg = sprintf "TipoMovto: deve ser um valor valido" 
-            Error msg
-        else if str.Contains("AP") 
-            || str.Contains("CO") 
-            || str.Contains("RE") 
-            || str.Contains("SM") 
-            || str.Contains("CA") 
-            || str.Contains("FT") then
-                ConstrainedType.createStringOption "TipoMovto" String02 02 str
-        else 
-            let msg = sprintf "TipoMovto: Format não reconhecido '%s'" str
-            Error msg

@@ -13,23 +13,22 @@ open Application.ApoliceService
 [<EntryPoint>]
 let main _ =
 
-    let json = "{\"tipoMovto\":\"AP\"," +
-                "\"apolice\":\"123456\"}";
+    // Json Enviado
+    let json = "{\"TipoMovto\":\"AP\"," +
+                "\"ApoliceDoc\":\"123456\"}";
     
+    // Json transformado em DTO
     let apoliceDto = jsonToObj<ApoliceDTO>(json)
-    printfn "DTO: %O" apoliceDto
+    printfn "JSON to DTO: %O" apoliceDto
     printfn "\n"  
 
-    let testeDTO = create apoliceDto
-    printfn "Teste DTO: %O" testeDTO   
-    printfn "\n" 
+    // Enviado Para criar uma apolice
+    let dtoRetorno = create apoliceDto
 
-    let jsonTeste = objToJson(testeDTO)
-    printfn "Json Teste: %O" jsonTeste
+    // Dto Retornada para Json
+    let dTOToJson = objToJson(dtoRetorno)
+    printfn "DTO to Json: %O" dTOToJson
     printfn "\n"  
-
-    let JsonDTO = objToJson(apoliceDto)
-    printfn "Json Teste: %O" JsonDTO
 
     System.Console.ReadKey() |> ignore
     0

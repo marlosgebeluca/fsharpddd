@@ -1,21 +1,21 @@
 namespace Application
 
-open CrossInfra
+open Domain
 open Domain.Apolice
 
 module ApoliceAdapter = 
-  let dtoToDomain(apolice:ApoliceDTO) : ApoliceDomain = 
+  let dtoToEntity(apolice:ApoliceDTO) : ApoliceEntity = 
     {
-      NumProposta = Id apolice.numProposta
-      TipoMovto = TipoMovto (String02 apolice.tipoMovto)
-      Apolice = Apolice (String30 apolice.apolice)
-      Endossos = apolice.endossos
+      NumProposta = Id <| apolice.NumProposta
+      TipoMovto = TipoMovto <| (String02 <| apolice.TipoMovto)
+      ApoliceDoc = ApoliceDoc <| (String30 <| apolice.ApoliceDoc)
+      Endossos = apolice.Endossos
     }
   
-  let domainToDTO(apolice:ApoliceDomain) : ApoliceDTO = 
+  let entityToDTO(apolice:ApoliceEntity) : ApoliceDTO = 
     {
-      numProposta = int <| apolice.NumProposta
-      tipoMovto = string <| apolice.TipoMovto
-      apolice = string <| apolice.Apolice
-      endossos = apolice.Endossos
+      NumProposta = int <| apolice.NumProposta
+      TipoMovto = apolice.TipoMovto |> TipoMovto.value |> String02.value
+      ApoliceDoc = apolice.ApoliceDoc |> ApoliceDoc.value |> String30.value
+      Endossos = apolice.Endossos
     }

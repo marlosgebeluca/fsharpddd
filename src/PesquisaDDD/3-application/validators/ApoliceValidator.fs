@@ -1,15 +1,16 @@
 namespace Application
 
-open CrossInfra
+open Domain
 open Domain.Apolice
 
 module ApoliceValidator =
   let validar(apolice:ApoliceDTO) =
-    let tipoMovto = TipoMovto.create apolice.tipoMovto  
-    let apolice = String30.create apolice.apolice
+    let tipoMovto = TipoMovto.create apolice.TipoMovto  
+    let apoliceDoc = String30.create apolice.ApoliceDoc
 
     match tipoMovto with
     | Error e -> raise(System.ArgumentException("Error de validação Tipo Movimento"))
-    | OK -> match apolice with
-            | Error e -> raise(System.ArgumentException("Error de validação Apolice"))
-            | OK -> "S"
+    | OK -> 
+      match apoliceDoc with
+      | Error e -> raise(System.ArgumentException("Error de validação Apolice"))
+      | OK -> "S"

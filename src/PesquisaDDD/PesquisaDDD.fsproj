@@ -4,23 +4,45 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="0-cross-infra/types/SimpleTypes.fs" />
+    <!-- Types -->
     <Compile Include="0-cross-infra/myLib/JsonSerializer.fs" />
 
     <Compile Include="5-infra/types/EmDoctos.fs" />
 
-    <Compile Include="4-domain/types/EndossoTypes.fs" />
-    <Compile Include="4-domain/types/ApoliceTypes.fs" />
-    <Compile Include="4-domain/helpers/ValidaApoliceHelper.fs" />
+    <Compile Include="4-domain/types/Domain.SimpleTypes.fs" />
+    <Compile Include="4-domain/types/Domain.EndossoTypes.fs" />
+    <Compile Include="4-domain/types/Domain.ApoliceTypes.fs" />
+    <Compile Include="4-domain/types/Domain.WorkFlowTypes.fs" />  
 
+    <Compile Include="3-application/types/App.WorkFlowTypes.fs" />  
+    <!-- Fim Types -->
+
+    <!-- Infra -->
+    <Compile Include="5-infra/Repository.fs" />
+    <!-- Fim Infra -->
+
+    <!-- Domain -->
+    <Compile Include="4-domain/services/Domain.ApoliceService.fs" />
+    <!-- Fim Domain -->
+
+    <!-- Applicarion -->
     <Compile Include="3-application/validators/ApoliceValidator.fs" />
     <Compile Include="3-application/adapters/ApoliceAdapter.fs" />
-    <Compile Include="3-application/services/ApoliceService.fs" />
+    <Compile Include="3-application/services/App.ApoliceService.fs" />
+    <!-- Fim Applicarion -->
 
+    <!-- Presentation -->
     <Compile Include="1-presentation/Suave/Config.fs" />
     <Compile Include="1-presentation/Suave/ApoliceRoutes.fs" />
     <Compile Include="1-presentation/Suave/MainRoutes.fs" />
+    <!-- Fim Presentation -->
+
+    <!-- Cross infra -->
+    <Compile Include="0-cross-infra/IoC.fs" />
+    <!-- Cross infra -->
+
     <Compile Include="App.fs" />
+
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
