@@ -4,22 +4,29 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Types -->
+    <!-- Cross infra -->
+    <Compile Include="0-cross-infra/IoC.fs" />
     <Compile Include="0-cross-infra/myLib/JsonSerializer.fs" />
+    <!-- Cross infra -->
 
+    <!-- Types -->
     <Compile Include="5-infra/types/EmDoctos.fs" />
-
+    <Compile Include="5-infra/types/Infra.WorkFlowTypes.fs" />
     <Compile Include="4-domain/types/Domain.SimpleTypes.fs" />
     <Compile Include="4-domain/types/Domain.EndossoTypes.fs" />
     <Compile Include="4-domain/types/Domain.ApoliceTypes.fs" />
     <Compile Include="4-domain/types/Domain.WorkFlowTypes.fs" />  
-
     <Compile Include="3-application/types/App.WorkFlowTypes.fs" />  
     <!-- Fim Types -->
 
     <!-- Infra -->
     <Compile Include="5-infra/Repository.fs" />
+    <Compile Include="5-infra/repositories/ApoliceRepository.fs" />
     <!-- Fim Infra -->
+
+    <!-- Types -->
+    <Compile Include="0-cross-infra/types/CommonTypes.fs" />
+    <!-- Fim Types -->
 
     <!-- Domain -->
     <Compile Include="4-domain/services/Domain.ApoliceService.fs" />
@@ -37,10 +44,8 @@
     <Compile Include="1-presentation/Suave/MainRoutes.fs" />
     <!-- Fim Presentation -->
 
-    <!-- Cross infra -->
-    <Compile Include="0-cross-infra/IoC.fs" />
-    <!-- Cross infra -->
 
+    
     <Compile Include="App.fs" />
 
     <None Include="App.config" />

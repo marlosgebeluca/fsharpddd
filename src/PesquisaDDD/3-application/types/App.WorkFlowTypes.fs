@@ -1,13 +1,15 @@
 namespace Application
 open Domain.Apolice
+open System.Runtime.Serialization
 
 type Find = unit -> List<ApoliceDTO>
-type FindOne = Id -> string
-type Update = (Id * ApoliceDTO) -> ApoliceDTO
-type Delete = Id -> string
+type FindOne = NumeroDaApolice -> string
+type Update = (NumeroDaApolice * ApoliceDTO) -> ApoliceDTO
+type Delete = NumeroDaApolice -> string
 
 type CadastrarApolice = ApoliceDTO
-type Create =
+
+type CreateApolice =
   CadastrarApolice
     -> ApoliceDTO
     -> ApoliceDTO

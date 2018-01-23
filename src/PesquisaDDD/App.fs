@@ -1,36 +1,36 @@
 module PesquisaDDD
 
-// open Apresentacao.MainRoutes
-// open Apresentacao.Config
+open Apresentacao.MainRoutes
+open Apresentacao.Config
 
-// open Suave
+open Suave
 
-open Domain.Apolice
-open CrossInfra.JsonSerializer
+// open Domain.Apolice
+// open CrossInfra.JsonSerializer
 
-open Application.ApoliceService
+// open Application.ApoliceService
 
 [<EntryPoint>]
 let main _ =
 
-    // Json Enviado
-    let json = "{\"TipoMovto\":\"AP\"," +
-                "\"ApoliceDoc\":\"123456\"}";
+    // // Json Enviado
+    // let json = "{\"TipoMovto\":\"AP\"," +
+    //             "\"ApoliceDoc\":\"123456\"}";
     
-    // Json transformado em DTO
-    let apoliceDto = jsonToObj<ApoliceDTO>(json)
-    printfn "JSON to DTO: %O" apoliceDto
-    printfn "\n"  
+    // // Json transformado em DTO
+    // let apoliceDto = jsonToObj<ApoliceDTO>(json)
+    // printfn "JSON to DTO: %O" apoliceDto
+    // printfn "\n"  
 
-    // Enviado Para criar uma apolice
-    let dtoRetorno = create apoliceDto
+    // // Enviado Para criar uma apolice
+    // let dtoRetorno = create apoliceDto
 
-    // Dto Retornada para Json
-    let dTOToJson = objToJson(dtoRetorno)
-    printfn "DTO to Json: %O" dTOToJson
-    printfn "\n"  
+    // // Dto Retornada para Json
+    // let dTOToJson = objToJson(dtoRetorno)
+    // printfn "DTO to Json: %O" dTOToJson
+    // printfn "\n"  
 
-    System.Console.ReadKey() |> ignore
-    0
-    // startWebServer cfg webPart
+    // System.Console.ReadKey() |> ignore
     // 0
+    startWebServer cfg webPart
+    0

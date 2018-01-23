@@ -4,9 +4,9 @@ open System.Runtime.Serialization
 
 module Apolice = 
 
-  type Id = Id of int with
+  type NumeroDaApolice = NumeroDaApolice of int with
     static member op_Explicit x = 
-        match x with Id f -> f
+        match x with NumeroDaApolice f -> f
 
   type TipoMovto = TipoMovto of String02
   
@@ -22,12 +22,7 @@ module Apolice =
         if String.IsNullOrEmpty(str) then
             let msg = sprintf "TipoMovto: deve ser um valor valido" 
             Error msg
-        else if str.Contains("AP") 
-            || str.Contains("CO") 
-            || str.Contains("RE") 
-            || str.Contains("SM") 
-            || str.Contains("CA") 
-            || str.Contains("FT") then
+        else if str.Contains("AP") then
                 ConstrainedType.createStringOption "TipoMovto" String02 02 str
         else 
             let msg = sprintf "TipoMovto: Format onão reconhecido '%s'" str
@@ -72,7 +67,7 @@ module Apolice =
   }
   
   type ApoliceEntity = {
-    NumProposta : Id;
+    NumProposta : NumeroDaApolice;
     TipoMovto : TipoMovto;
     ApoliceDoc : ApoliceDoc;
     Endossos : list<int>;

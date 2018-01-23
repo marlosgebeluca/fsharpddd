@@ -2,15 +2,14 @@ namespace Application
 
 module ApoliceService = 
 
-  let create : Create =    
-    fun cadastrarApolice apoliceDto ->
-      let validacao = ApoliceValidator.validar apoliceDto
+  let create apoliceDto : CreateApolice =
+    fun cadastrarApolice apoliceDto ->    
+      let validar = ApoliceValidator.validar apoliceDto
 
-      match validacao with
-      | OK -> 
-        let entidade = ApoliceAdapter.dtoToEntity apoliceDto
-        let apoliceRetornoDomain = 
-          entidade
-          |> Domain.ApoliceService.create entidade
+      let entidade = ApoliceAdapter.dtoToEntity apoliceDto
 
-        ApoliceAdapter.entityToDTO apoliceRetornoDomain
+      let apoliceRetornoDomain = 
+        entidade
+        |> Domain.ApoliceService.create entidade
+
+      ApoliceAdapter.entityToDTO apoliceRetornoDomain
