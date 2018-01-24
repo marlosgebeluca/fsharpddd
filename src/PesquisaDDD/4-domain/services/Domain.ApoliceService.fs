@@ -5,12 +5,12 @@ open CrossInfra
 module ApoliceService = 
 
   let find : FindApolices =
-    fun buscarApolices params ->
+    fun buscarApolices _parametros ->
       let buscarApolices: List<ApoliceEntity> = []
       buscarApolices
 
   let findOne : FindApolice =
-    fun buscaApolice id->
+    fun buscaApolice _id->
       let n = 666 |> NumeroDaApolice
       let a = "123456" |> String30 |> ApoliceDoc
       let t =  "AP" |> String02 |> TipoMovto
@@ -24,7 +24,7 @@ module ApoliceService =
       apolice
 
   let create : CreateApolice = 
-    fun cadastrarApolice entidade ->
+    fun _cadastrarApolice entidade ->
       let repository = ApoliceRepository()
      
       //Validar Regras de Negocios
@@ -34,7 +34,7 @@ module ApoliceService =
       updatedEntidade
 
   let update : UpdateApolice =
-    fun atualizarApolice id entidade ->
+    fun atualizarApolice _id entidade ->
       entidade
 
   let delete : DeleteApolice =

@@ -44,13 +44,13 @@ module Apolice =
   [<CLIMutable>]
   [<DataContract>]
   type ApoliceDTO = {
-    [<field: DataMember(Name = "numProposta")>]
+    [<field: DataMember(Name = "NumProposta")>]
     NumProposta : int;
-    [<field: DataMember(Name = "tipoMovto")>]
+    [<field: DataMember(Name = "TipoMovto")>]
     TipoMovto : string;
-    [<field: DataMember(Name = "apolice")>]
+    [<field: DataMember(Name = "ApoliceDoc")>]
     ApoliceDoc : string;
-    [<field: DataMember(Name = "endossos")>]
+    [<field: DataMember(Name = "Endossos")>]
     Endossos : list<int>;
   }
 

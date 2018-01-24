@@ -4,12 +4,8 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Cross infra -->
     <Compile Include="0-cross-infra/IoC.fs" />
     <Compile Include="0-cross-infra/myLib/JsonSerializer.fs" />
-    <!-- Cross infra -->
-
-    <!-- Types -->
     <Compile Include="5-infra/types/EmDoctos.fs" />
     <Compile Include="5-infra/types/Infra.WorkFlowTypes.fs" />
     <Compile Include="4-domain/types/Domain.SimpleTypes.fs" />
@@ -17,38 +13,23 @@
     <Compile Include="4-domain/types/Domain.ApoliceTypes.fs" />
     <Compile Include="4-domain/types/Domain.WorkFlowTypes.fs" />  
     <Compile Include="3-application/types/App.WorkFlowTypes.fs" />  
-    <!-- Fim Types -->
-
-    <!-- Infra -->
+    <Compile Include="5-infra/Connection.fsx" />
     <Compile Include="5-infra/Repository.fs" />
     <Compile Include="5-infra/repositories/ApoliceRepository.fs" />
-    <!-- Fim Infra -->
-
-    <!-- Types -->
     <Compile Include="0-cross-infra/types/CommonTypes.fs" />
-    <!-- Fim Types -->
-
-    <!-- Domain -->
     <Compile Include="4-domain/services/Domain.ApoliceService.fs" />
-    <!-- Fim Domain -->
-
-    <!-- Applicarion -->
     <Compile Include="3-application/validators/ApoliceValidator.fs" />
     <Compile Include="3-application/adapters/ApoliceAdapter.fs" />
     <Compile Include="3-application/services/App.ApoliceService.fs" />
-    <!-- Fim Applicarion -->
-
-    <!-- Presentation -->
     <Compile Include="1-presentation/Suave/Config.fs" />
     <Compile Include="1-presentation/Suave/ApoliceRoutes.fs" />
     <Compile Include="1-presentation/Suave/MainRoutes.fs" />
-    <!-- Fim Presentation -->
-
-
-    
     <Compile Include="App.fs" />
-
     <None Include="App.config" />
+
+     <Reference Include="FSharp.Data.SqlProvider">
+      <HintPath>..\..\packages\SQLProvider\lib\net451\FSharp.Data.SqlProvider.dll"</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Extensions.dll" />

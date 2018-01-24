@@ -3,13 +3,12 @@ namespace Application
 module ApoliceService = 
 
   let create apoliceDto : CreateApolice =
-    fun cadastrarApolice apoliceDto ->    
-      let validar = ApoliceValidator.validar apoliceDto
+    let __validar = ApoliceValidator.validar apoliceDto
+    let entidade = ApoliceAdapter.dtoToEntity apoliceDto
+    let apoliceRetornoDomain = 
+      entidade
+      |> Domain.ApoliceService.create entidade
 
-      let entidade = ApoliceAdapter.dtoToEntity apoliceDto
-
-      let apoliceRetornoDomain = 
-        entidade
-        |> Domain.ApoliceService.create entidade
-
-      ApoliceAdapter.entityToDTO apoliceRetornoDomain
+    let retorno = ApoliceAdapter.entityToDTO apoliceRetornoDomain
+    fun _cadastrarApolice ->
+      retorno

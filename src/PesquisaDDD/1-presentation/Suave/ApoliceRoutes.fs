@@ -5,27 +5,21 @@ open Suave.Filters
 open Suave.Operators
 open Suave.Json
 open Suave.Successful
-
 open Domain.Apolice
 open Application.ApoliceService
-
-open CrossInfra.JsonSerializer
-
-open System.Runtime.Serialization
-[<DataContract>]
-type Testezinho = { 
-  [<field: DataMember(Name = "retorno")>]
-  retorno : ApoliceDTO;
-}
 
 module ApoliceRoutes =
   let apoliceCreate = 
     (mapJson (fun (apolice:ApoliceDTO) -> 
-      
-      let dtoRetorno : ApoliceDTO = apolice
-      
-      { retorno = dtoRetorno }
+      let retorno = create apolice
+      retorno
     ))
+
+  // let apoliceUpdate = 
+  //   (mapJson (fun (apolice:ApoliceDTO) -> 
+  //     let retorno = update apolice
+  //     retorno
+  //   ))
 
   let apoliceRoutes =
     choose [

@@ -2,6 +2,7 @@ source https://www.nuget.org/api/v2
 
 framework: >= net461
 nuget FSharp.Core
+nuget SQLProvider 1.1.28
 nuget Suave
 
 group Build
