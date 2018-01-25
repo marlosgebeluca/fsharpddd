@@ -13,7 +13,6 @@
     <Compile Include="4-domain/types/Domain.ApoliceTypes.fs" />
     <Compile Include="4-domain/types/Domain.WorkFlowTypes.fs" />  
     <Compile Include="3-application/types/App.WorkFlowTypes.fs" />  
-    <Compile Include="5-infra/Connection.fsx" />
     <Compile Include="5-infra/Repository.fs" />
     <Compile Include="5-infra/repositories/ApoliceRepository.fs" />
     <Compile Include="0-cross-infra/types/CommonTypes.fs" />
@@ -24,15 +23,21 @@
     <Compile Include="1-presentation/Suave/Config.fs" />
     <Compile Include="1-presentation/Suave/ApoliceRoutes.fs" />
     <Compile Include="1-presentation/Suave/MainRoutes.fs" />
+    <Compile Include="5-infra/DataAccess.fsx" />
     <Compile Include="App.fs" />
     <None Include="App.config" />
-
-     <Reference Include="FSharp.Data.SqlProvider">
-      <HintPath>..\..\packages\SQLProvider\lib\net451\FSharp.Data.SqlProvider.dll"</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web.Extensions.dll" />
+    <Reference Include="System.Web.Extensions.dll" /> <!-- Suave -->
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FSharp.Data.SqlProvider">
+      <HintPath>..\..\packages\SQLProvider\lib\net451\FSharp.Data.SqlProvider.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
+  
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

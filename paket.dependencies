@@ -2,11 +2,13 @@ source https://www.nuget.org/api/v2
 
 framework: >= net461
 nuget FSharp.Core
-nuget SQLProvider 1.1.28
+nuget SQLProvider
 nuget Suave
 
 group Build
 source https://www.nuget.org/api/v2
 
 nuget FAKE
+nuget FSharp.Core
+nuget SQLProvider
 nuget Suave
