@@ -1,43 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net461</TargetFramework>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="0-cross-infra/IoC.fs" />
-    <Compile Include="0-cross-infra/myLib/JsonSerializer.fs" />
-    <Compile Include="5-infra/types/EmDoctos.fs" />
-    <Compile Include="5-infra/types/Infra.WorkFlowTypes.fs" />
-    <Compile Include="4-domain/types/Domain.SimpleTypes.fs" />
-    <Compile Include="4-domain/types/Domain.EndossoTypes.fs" />
-    <Compile Include="4-domain/types/Domain.ApoliceTypes.fs" />
-    <Compile Include="4-domain/types/Domain.WorkFlowTypes.fs" />  
-    <Compile Include="3-application/types/App.WorkFlowTypes.fs" />  
-    <Compile Include="5-infra/Repository.fs" />
-    <Compile Include="5-infra/repositories/ApoliceRepository.fs" />
-    <Compile Include="0-cross-infra/types/CommonTypes.fs" />
-    <Compile Include="4-domain/services/Domain.ApoliceService.fs" />
-    <Compile Include="3-application/validators/ApoliceValidator.fs" />
-    <Compile Include="3-application/adapters/ApoliceAdapter.fs" />
-    <Compile Include="3-application/services/App.ApoliceService.fs" />
-    <Compile Include="1-presentation/Suave/Config.fs" />
-    <Compile Include="1-presentation/Suave/ApoliceRoutes.fs" />
-    <Compile Include="1-presentation/Suave/MainRoutes.fs" />
-    <Compile Include="5-infra/DataAccess.fsx" />
+    <!-- Libs -->
+    <Compile Include="ddd/cross-infra/IoC.fs" />
+    <Compile Include="ddd/cross-infra/myLib/JsonSerializer.fs" />
+
+    <!-- Types -->
+    <Compile Include="ddd/infra/types/EmDoctos.fs" />
+    <Compile Include="ddd/infra/types/Infra.WorkFlowTypes.fs" />
+    <Compile Include="ddd/domain/types/Domain.SimpleTypes.fs" />
+    <Compile Include="ddd/domain/types/Domain.EndossoTypes.fs" />
+    <Compile Include="ddd/domain/types/Domain.ApoliceTypes.fs" />
+    <Compile Include="ddd/domain/types/Domain.WorkFlowTypes.fs" />  
+    <Compile Include="ddd/application/types/App.WorkFlowTypes.fs" />  
+
+    <!-- Infra -->
+    <Compile Include="ddd/infra/DataAccess.fs" />
+    <Compile Include="ddd/infra/mappers/ApoliceMapper.fs" />
+    <Compile Include="ddd/infra/mappers/EndossoMapper.fs" />
+    <Compile Include="ddd/infra/repositories/ApoliceRepository.fs" />
+    <Compile Include="ddd/infra/repositories/EndossoRepository.fs" />
+
+    <!-- Types -->
+    <Compile Include="ddd/cross-infra/types/CommonTypes.fs" />
+    
+    <!-- Domain -->
+    <Compile Include="ddd/domain/services/Domain.ApoliceService.fs" />
+    <Compile Include="ddd/domain/services/Domain.EndossoService.fs" />
+
+    <!-- Application -->
+    <Compile Include="ddd/application/validators/ApoliceValidator.fs" />
+    <Compile Include="ddd/application/validators/EndossoValidator.fs" />
+    <Compile Include="ddd/application/adapters/ApoliceAdapter.fs" />
+    <Compile Include="ddd/application/adapters/EndossoAdapter.fs" />
+    <Compile Include="ddd/application/services/App.ApoliceService.fs" />
+    <Compile Include="ddd/application/services/App.EndossoService.fs" />
+
+    <!-- Presentation -->
+    <Compile Include="ddd/presentation/Suave/Config.fs" />
+    <Compile Include="ddd/presentation/Suave/ApoliceRoutes.fs" />
+    <Compile Include="ddd/presentation/Suave/EndossoRoutes.fs" />
+    <Compile Include="ddd/presentation/Suave/MainRoutes.fs" />
+    
+    <!-- App/Config -->
     <Compile Include="App.fs" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Extensions.dll" /> <!-- Suave -->
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="FSharp.Data.SqlProvider">
-      <HintPath>..\..\packages\SQLProvider\lib\net451\FSharp.Data.SqlProvider.dll</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
   
+  <ItemGroup>
+    <PackageReference Include="SQLProvider" Version="1.1.29" />
+  </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
