@@ -1,43 +1,41 @@
 namespace Domain
 open Apolice
 open CrossInfra
+open System.Collections.Generic
 
 module ApoliceService = 
 
-  let find : FindApolices =
-    fun buscarApolices _parametros ->
-      let buscarApolices: List<ApoliceEntity> = []
-      buscarApolices
+  let repository = ApoliceRepository()
 
-  let findOne : FindApolice =
-    fun buscaApolice _id->
-      let n = 666 |> NumeroDaApolice
-      let a = "123456" |> String30 |> ApoliceDoc
-      let t =  "AP" |> String02 |> TipoMovto
+  let findEndossos = 
+    let retorno = (repository :> IApoliceRepository).FindEndossos
+    retorno
 
-      let apolice: ApoliceEntity = {
-        NumProposta = n;
-        TipoMovto = t;
-        ApoliceDoc = a;
-        Endossos = [];   
-      }
-      apolice
+  let find : BuscarApolices =
+    let retorno = (repository :> IApoliceRepository).FindApolice
+    retorno
+
+  let findOne id : BuscarApolice =
+    let retorno = (repository :> IApoliceRepository).FindOneApolice id
+
+    retorno.Endossos <- findEndossos
+    retorno
 
   let create : CreateApolice = 
     fun _cadastrarApolice entidade ->
-      let repository = ApoliceRepository()
-     
-      //Validar Regras de Negocios
       let retorno = (repository :> IApoliceRepository).CreateApolice(entidade)
       retorno
 
-  let update : UpdateApolice =
-    fun atualizarApolice _id entidade ->
+  let update id entidade: UpdateApolice =
+    fun _atualizarApolice ->
+      let retorno = (repository :> IApoliceRepository).UpdateApolice(id, entidade)
       entidade
 
   let delete : DeleteApolice =
     fun deletarApolice id ->
       "Deletado " + id.ToString()
+
+  
 
   let renovarApolice: RenovarApolice  =
     fun __ numeroDaApolice ->

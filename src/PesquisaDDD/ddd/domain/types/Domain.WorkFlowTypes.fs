@@ -1,17 +1,16 @@
 namespace Domain
 open Apolice
 open Endosso
+open System.Collections.Generic
 
 // WorkFlow Buscar Apolice/Endosso
-type BuscarApolices = 
-  unit -> string
+type BuscarApolices = List<ApoliceEntity>
 
 type BuscarEndossos = 
   unit -> string  
 
 type FindApolices = 
   BuscarApolices
-    -> string
     -> List<ApoliceEntity>
 
 type FindEndossos = 
@@ -20,13 +19,7 @@ type FindEndossos =
     -> List<EndossoEntity>    
 
 // WorkFlow Buscar um Apolice/Endosso
-type BuscarApolice = 
-  unit -> NumeroDaApolice
-
-type FindApolice = 
-  BuscarApolice
-    -> NumeroDaApolice
-    -> ApoliceEntity
+type BuscarApolice = ApoliceEntity
 
 type BuscarEndosso = 
   unit -> NumeroDoEndosso    
@@ -52,12 +45,11 @@ type CreateEndosso =
     -> EndossoEntity
 
 // WorkFlow Atualizar Apolice/Endosso
-type AtualizarApolice = 
-  NumeroDaApolice -> ApoliceEntity -> unit
+type AtualizarApolice = ApoliceEntity
 
 type UpdateApolice = 
   AtualizarApolice
-    -> NumeroDaApolice
+    -> int
     -> ApoliceEntity    
     -> ApoliceEntity  
 

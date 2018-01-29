@@ -70,5 +70,5 @@ module Apolice =
     NumProposta : NumeroDaApolice;
     TipoMovto : TipoMovto;
     ApoliceDoc : ApoliceDoc;
-    Endossos : list<int>;
+    mutable Endossos : int list;
   }

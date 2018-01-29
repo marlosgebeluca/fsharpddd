@@ -1,36 +1,42 @@
 namespace Infra
+open System.Collections.Generic
 
-open ExpressionOptimizer
-type BuscarApolice = 
-  string
+type BuscarUm = EmDoctos
 
-type BuscarEndosso = 
-  string
-
-type BuscarApolices = 
-  List<string>
-
-type BuscarEndossos = 
-  List<string> 
+type BuscarTodos = List<EmDoctos>
   
-type CadastrarApolice = EmDoctos
+type Cadastrar = EmDoctos
 
-type Create =
-  CadastrarApolice
-    -> unit
+type CadastrarUmaApolice =
+  Cadastrar
+    -> EmDoctos
     -> EmDoctos
 
-type CadastrarEndosso = 
-  int
+type CadastrarUmEndosso = 
+  Cadastrar
+    -> EmDoctos
+    -> EmDoctos
 
-type AtualizarApolice = 
-  string
+type Atualizar = EmDoctos
+
+type AtualizarUmaApolice = 
+  Atualizar
+    -> EmDoctos
+    -> EmDoctos
 
 type AtualizarEndosso = 
-  string
+  Atualizar
+    -> EmDoctos
+    -> EmDoctos
+
+type Deletar = string
 
 type DeletarApolice =
- string
+  Deletar 
+    -> int
+    -> string
 
 type DeletarEndosso =
- string 
+  Deletar 
+    -> int
+    -> string

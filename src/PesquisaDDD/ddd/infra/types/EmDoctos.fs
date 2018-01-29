@@ -1,7 +1,7 @@
 namespace Infra
 
 type EmDoctos = {
-  DocNumProposta : int
-  DocTipoMovto : string
-  DocApolice : string
+  mutable DocNumProposta : int
+  mutable DocTipoMovto : string
+  mutable DocApolice : string
 }
