@@ -1,41 +1,29 @@
 namespace Domain
 open Endosso
 open CrossInfra
+open System.Collections.Generic
 
-// module EndossoService = 
+module EndossoService = 
 
-  // let find : FindEndossos =
-  //   fun buscarEndossos _parametros ->
-  //     let buscarEndossos: List<EndossoEntity> = []
-  //     buscarEndossos
+  let repository = EndossoRepository()
 
-  // let findOne : FindEndosso =
-  //   fun buscaEndosso _id->
-  //     let n = 666 |> NumeroDoEndosso
-  //     let a = "123456" |> String30 |> EndossoDoc
-  //     let t =  "AP" |> String02 |> TipoMovto
+  let find : BuscarEndossos =
+    let retorno = (repository :> IEndossoRepository).FindEndosso
+    retorno
 
-  //     let endosso: EndossoEntity = {
-  //       NumProposta = n;
-  //       TipoMovto = t;
-  //       EndossoDoc = a;
-  //     }
-  //     endosso
+  let findOne id : BuscarEndosso =
+    let retorno = (repository :> IEndossoRepository).FindOneEndosso id
+    retorno
 
-  // let create : CreateEndosso = 
-  //   fun _cadastrarEndosso entidade ->
-  //     let repository = EndossoRepository()
-     
-  //     //Validar Regras de Negocios
-  //     let novoId = (repository :> IEndossoRepository).CreateEndosso(entidade)
-      
-  //     let updatedEntidade = { entidade with NumProposta = NumeroDoEndosso novoId }
-  //     updatedEntidade
+  let create : CreateEndosso = 
+    fun _cadastrarEndosso entidade ->
+      let retorno = (repository :> IEndossoRepository).CreateEndosso(entidade)
+      retorno
 
-  // let update : UpdateEndosso =
-  //   fun atualizarEndosso _id entidade ->
-  //     entidade
+  let update id entidade : AtualizarEndosso =
+    let retorno = (repository :> IEndossoRepository).UpdateEndosso(id, entidade)
+    retorno
 
-  // let delete : DeleteEndosso =
-  //   fun deletarEndosso id ->
-  //     "Deletado " + id.ToString()
+  let delete id : DeletarEndosso =
+    let retorno = (repository :> IEndossoRepository).DeleteEndosso(id)
+    retorno

@@ -7,13 +7,13 @@ module EndossoAdapter =
   let dtoToEntity(endosso:EndossoDTO) : EndossoEntity = 
     {
       NumProposta = endosso.NumProposta |> NumeroDoEndosso
-      TipoMovto = endosso.TipoMovto |> String02 |> TipoMovto
-      EndossoDoc = endosso.EndossoDoc |> String30 |> EndossoDoc
+      TipoMovto = endosso.TipoMovto |> String02 |> TipoMovtoEndosso
+      ApoliceDoc = endosso.ApoliceDoc |> String30 |> ApoliceDoc
     }
   
   let entityToDTO(endosso:EndossoEntity) : EndossoDTO = 
     {
       NumProposta = endosso.NumProposta |> int
-      TipoMovto = endosso.TipoMovto |> TipoMovto.value |> String02.value
-      EndossoDoc = endosso.EndossoDoc |> EndossoDoc.value |> String30.value
+      TipoMovto = endosso.TipoMovto |> TipoMovtoEndosso.value |> String02.value
+      ApoliceDoc = endosso.ApoliceDoc |> ApoliceDoc.value |> String30.value
     }

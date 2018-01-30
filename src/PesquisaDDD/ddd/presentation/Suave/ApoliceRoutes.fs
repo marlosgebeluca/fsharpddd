@@ -15,8 +15,6 @@ module ApoliceRoutes =
 
   let apoliceFindOne id = request ( fun r -> OK ( JsonSerializer.objToJson(findOne (id|>int))))
 
-  // let apoliceDelete id = request (fun r -> OK (((apoliceService :> IApoliceService).Delete(int id).ToString())))
-
   let apoliceCreate = 
     (mapJson (fun (apolice:ApoliceDTO) -> 
       let retorno = create apolice
@@ -30,6 +28,8 @@ module ApoliceRoutes =
       retorno
     ))
 
+  let apoliceDelete id = request ( fun r -> OK ( JsonSerializer.objToJson(delete (id|>int))))
+
   let apoliceRoutes =
     choose [
       GET >=> choose [
@@ -40,10 +40,9 @@ module ApoliceRoutes =
         path "/api/apolice" >=> apoliceCreate
       ]
       PUT >=> choose [
-        path "/api/apolice" >=> OK "update()"
+        pathScan "/api/apolice/%s" apoliceUpdate
       ]
       DELETE >=> choose[
-        path "/api/apolice/%s" >=> OK "delete()"  
+        pathScan "/api/apolice/%s" apoliceDelete
       ]
-
     ]

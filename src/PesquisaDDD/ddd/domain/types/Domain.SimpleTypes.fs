@@ -17,6 +17,19 @@ type String100 = String100 of string
 type String200 = String200 of string
 type String400 = String400 of string
 
+type NumeroDoEndosso = NumeroDoEndosso of int with
+    static member op_Explicit x = 
+        match x with NumeroDoEndosso f -> f
+
+type TipoMovtoEndosso = TipoMovtoEndosso of String02
+type ApoliceDoc = ApoliceDoc of String30
+
+type NumeroDaApolice = NumeroDaApolice of int with
+    static member op_Explicit x = 
+        match x with NumeroDaApolice f -> f
+
+type TipoMovtoApolice = TipoMovtoApolice of String02
+
 module ConstrainedType =
   /// Create a constrained string using the constructor provided
   /// Return Error if input is null, empty, or length > maxLen
@@ -275,3 +288,48 @@ module String400 =
   let createOption str = 
       ConstrainedType.createStringOption "String400" String400 400 str            
 
+module TipoMovtoEndosso = 
+  /// Retorna o valor da string dentro de TipoMovto s
+  let value (TipoMovtoEndosso str) = str
+
+  /// Cria uma TipoMovtoEndosso
+  /// Retorna o erro se valor da string for null ou vazia
+  let create str =
+    if String.IsNullOrEmpty(str) then
+      let msg = sprintf "TipoMovtoEndosso: deve ser um valor valido" 
+      Error msg
+    else if str.Contains("CO") || str.Contains("RE") || str.Contains("SM") || str.Contains("CA") || str.Contains("FT") then
+      ConstrainedType.createStringOption "TipoMovtoEndosso" String02 02 str
+    else 
+      let msg = sprintf "TipoMovtoEndosso: Formato não reconhecido '%s'" str
+      Error msg
+
+module ApoliceDoc = 
+  /// Retorna o valor da string dentro de TipoMovto s
+  let value (ApoliceDoc str) = str
+
+  /// Cria uma Endosso
+  /// Retorna o erro se valor da string for null ou vazia
+  let create str =
+      if String.IsNullOrEmpty(str) then
+        let msg = sprintf "ApoliceDoc: deve ser um valor valido" 
+        Error msg
+      else 
+        ConstrainedType.createStringOption "ApoliceDoc" String30 30 str
+
+module TipoMovtoApolice = 
+  /// Retorna o valor da string dentro de TipoMovtoApolice
+  let value (TipoMovtoApolice str) = str
+
+  /// Cria uma TipoMovtoApolice
+  /// Retorna o erro se valor da string for null ou vazia
+  let create str =
+    if String.IsNullOrEmpty(str) then
+      let msg = sprintf "TipoMovtoApolice: deve ser um valor valido" 
+      Error msg
+    else if str.Contains("AP") then
+      ConstrainedType.createStringOption "TipoMovtoApolice" String02 02 str
+    else 
+      let msg = sprintf "TipoMovtoApolice: Formato não reconhecido '%s'" str
+      Error msg       
+       

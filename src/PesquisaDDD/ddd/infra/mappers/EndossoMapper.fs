@@ -10,14 +10,12 @@ module EndossoMapper =
     {
       DocNumProposta = endosso.NumProposta |> int
       DocTipoMovto = endosso.TipoMovto |> string
-      DocApolice = endosso.EndossoDoc |> string
+      DocApolice = endosso.ApoliceDoc |> string
     }
   
   let modelToEntity(endosso:EmDoctos) : EndossoEntity = 
-    let endossos = []
-
     {
       NumProposta = endosso.DocNumProposta |> NumeroDoEndosso
-      TipoMovto = endosso.DocTipoMovto |> String02 |> TipoMovto
-      EndossoDoc = endosso.DocApolice |> String30 |> EndossoDoc
+      TipoMovto = endosso.DocTipoMovto |> String02 |> TipoMovtoEndosso
+      ApoliceDoc = endosso.DocApolice |> String30 |> ApoliceDoc
     }

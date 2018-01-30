@@ -8,13 +8,12 @@ type IApoliceRepository =
   abstract FindApolice : List<ApoliceEntity>
   abstract FindOneApolice : int -> ApoliceEntity
   abstract CreateApolice : ApoliceEntity -> ApoliceEntity
-  abstract UpdateApolice : int * ApoliceEntity -> string
-  // abstract DeleteApolice : int -> string
-  abstract FindEndossos : int list
+  abstract UpdateApolice : int * ApoliceEntity -> ApoliceEntity
+  abstract DeleteApolice : int -> string
+  abstract FindEndossos : int -> List<int>
 
 type ApoliceRepository() =
   interface IApoliceRepository with
-    
 
     member __.FindApolice = 
       let lista = RepositoryApolice.find
@@ -26,53 +25,73 @@ type ApoliceRepository() =
             DocTipoMovto = emDocto.DocTipoMovto
             DocApolice = emDocto.DocApolice
         })
-
       apolices
 
     member __.FindOneApolice(id) = 
       let emDocto = RepositoryApolice.findOne id
       let retorno = ApoliceMapper.modelToEntity emDocto
       retorno
-      
 
     member __.CreateApolice(entidade) = 
       let emDocto = ApoliceMapper.entityToModel entidade
       let model = RepositoryApolice.create emDocto
       let retorno = ApoliceMapper.modelToEntity model
-
       retorno
 
     member __.UpdateApolice(id, entidade) = 
-      "RepositoryApolice.update" 
+      let emDocto = ApoliceMapper.entityToModel entidade
+      let model = RepositoryApolice.update id emDocto
+      let retorno = ApoliceMapper.modelToEntity model
+      retorno
 
-    // member __.DeleteApolice(id) = 
-    //   RepositoryApolice.delete 
+    member __.DeleteApolice(id) = 
+      let retorno = RepositoryApolice.delete id
+      retorno
 
-    member __.FindEndossos =
-      let retorno = [15;16;17]
+    member __.FindEndossos(idApolice) =
+      let retorno = RepositoryApolice.findEndossos idApolice
       retorno 
            
-// type IEndossoRepository = 
-//   abstract FindEndosso : string[] -> List<string>
-//   abstract FindOneEndosso : int -> string
-//   abstract CreateEndosso : EndossoEntity -> int
-//   abstract UpdateEndosso : int * EndossoEntity -> string
-//   abstract DeleteEndosso : int -> string
+type IEndossoRepository = 
+  abstract FindEndosso : List<EndossoEntity>
+  abstract FindOneEndosso : int -> EndossoEntity
+  abstract CreateEndosso : EndossoEntity -> EndossoEntity
+  abstract UpdateEndosso : int * EndossoEntity -> EndossoEntity
+  abstract DeleteEndosso : int -> string
 
-// type EndossoRepository() =
-//   interface IEndossoRepository with
-//     member __.FindEndosso(parametros) = 
-//       RepositoryEndosso.find
+type EndossoRepository() =
+  interface IEndossoRepository with
 
-//     member __.FindOneEndosso(id) = 
-//       RepositoryEndosso.findOne 
+    member __.FindEndosso = 
+      let lista = RepositoryEndosso.find
+      let endossos = new List<EndossoEntity>()
 
-//     member __.CreateEndosso(entidade) = 
-//       RepositoryEndosso.create 
+      for emDocto in lista do
+        endossos.Add(EndossoMapper.modelToEntity {
+            DocNumProposta = emDocto.DocNumProposta
+            DocTipoMovto = emDocto.DocTipoMovto
+            DocApolice = emDocto.DocApolice
+        })
+      endossos
 
-//     member __.UpdateEndosso(id, entidade) = 
-//       RepositoryEndosso.update 
+    member __.FindOneEndosso(id) = 
+      let emDocto = RepositoryEndosso.findOne id
+      let retorno = EndossoMapper.modelToEntity emDocto
+      retorno
 
-//     member __.DeleteEndosso(id) = 
-//       RepositoryEndosso.delete 
+    member __.CreateEndosso(entidade) = 
+      let emDocto = EndossoMapper.entityToModel entidade
+      let model = RepositoryEndosso.create emDocto
+      let retorno = EndossoMapper.modelToEntity model
+      retorno
+
+    member __.UpdateEndosso(id, entidade) = 
+      let emDocto = EndossoMapper.entityToModel entidade
+      let model = RepositoryEndosso.update id emDocto
+      let retorno = EndossoMapper.modelToEntity model
+      retorno
+
+    member __.DeleteEndosso(id) = 
+      let retorno = RepositoryEndosso.delete id
+      retorno
            

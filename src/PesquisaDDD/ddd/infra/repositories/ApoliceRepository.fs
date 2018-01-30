@@ -65,7 +65,7 @@ module RepositoryApolice =
     let busca =
       query {
           for emDocto in ctx.Dados.EmDoctos do
-          where (emDocto.DocPropApolice = novoEmDocto.DocNumProposta)
+          where (emDocto.DocNumProposta = novoEmDocto.DocNumProposta)
           select emDocto
       } |> Seq.toArray |> Array.map(fun i -> i.ColumnValues |> Map.ofSeq)
 
@@ -82,11 +82,53 @@ module RepositoryApolice =
 
     retorno
 
-  let update : AtualizarUmaApolice = 
-    fun _atualizar emDocto -> 
-    emDocto
+  let update id emDocto : Atualizar = 
+    let retorno : EmDoctos = { 
+      DocNumProposta = 0
+      DocTipoMovto = ""
+      DocApolice = ""
+    }
 
-  let delete : DeletarApolice = 
-    fun _deletar id ->
-    let retorno = "Deletar Apolice"
+    query {
+      for emDoc in ctx.Dados.EmDoctos do
+      where (emDoc.DocNumProposta = id)
+    } 
+    |> Seq.iter(fun encontrado ->
+      encontrado.DocTipoMovto <- emDocto.DocTipoMovto
+      encontrado.DocApolice <- emDocto.DocApolice |> Some
+
+      retorno.DocNumProposta <- encontrado.DocNumProposta
+      retorno.DocTipoMovto <- emDocto.DocTipoMovto
+      retorno.DocApolice <- emDocto.DocApolice 
+    )
+    ctx.SubmitUpdates()
     retorno
+
+  let delete id : Deletar = 
+    query {
+      for emDoc in ctx.Dados.EmDoctos do
+      where (emDoc.DocNumProposta = id)
+    } 
+    |> Seq.iter(fun encontrado ->
+      encontrado.Delete()
+    )
+    ctx.SubmitUpdates()
+
+    let retorno = "Apolice " + (id|>string) + " deletada"
+    retorno
+
+  let findEndossos idApolice : BuscarEndossosDaApolice = 
+    let lista =
+      query {
+          for emDocto in ctx.Dados.EmDoctos do
+          where(emDocto.DocTipoMovto <> "AP" &&
+                emDocto.DocPropApolice = idApolice)
+          select emDocto
+      } |> Seq.toArray |> Array.map(fun i -> i.ColumnValues |> Map.ofSeq)
+
+    let endossos = new List<int>()
+
+    for emDocto in lista do
+      endossos.Add(emDocto.["doc_num_proposta"] |> string |> int) 
+    
+    endossos  

@@ -3,34 +3,47 @@ open Domain.Apolice
 open Domain.Endosso
 open System.Collections.Generic
 
-type Find = List<ApoliceDTO>
+type FindApolice = List<ApoliceDTO>
 
-type FindApolice =
-  Find  
-    -> string
-
-
-type BuscarUmaApolice = NumeroDaApolice -> ApoliceDTO
+type BuscarUmaApolice = int -> ApoliceDTO
 type FindOneApolice =
   BuscarUmaApolice
     -> ApoliceDTO
-
-type Update = (NumeroDaApolice * ApoliceDTO) -> ApoliceDTO
-type Delete = NumeroDaApolice -> string
 
 type CadastrarApolice = unit -> ApoliceDTO
 type CreateApolice =
   CadastrarApolice
     -> ApoliceDTO
 
-type CadastrarEndoso = unit -> EndossoDTO
-
-type CreateEndosso =
-  CadastrarApolice
-    -> EndossoDTO  
-
-
 type AtualizarApolice = unit -> ApoliceDTO
 type UpdateApolice =
   AtualizarApolice
-    -> ApoliceDTO      
+    -> ApoliceDTO     
+
+type DeletarApolice = int -> string
+type DeleteApolice =
+  DeletarApolice
+    -> string         
+
+type FindEndosso = List<EndossoDTO>
+
+type BuscarUmEndosso = int -> EndossoDTO
+type FindOneEndosso =
+  BuscarUmEndosso
+    -> EndossoDTO
+
+type CadastrarEndosso = unit -> EndossoDTO
+type CreateEndosso =
+  CadastrarEndosso
+    -> EndossoDTO
+
+type AtualizarEndosso = unit -> EndossoDTO
+type UpdateEndosso =
+  AtualizarEndosso
+    -> EndossoDTO     
+
+type DeletarEndosso = int -> string
+type DeleteEndosso =
+  DeletarEndosso
+    -> string         
+      

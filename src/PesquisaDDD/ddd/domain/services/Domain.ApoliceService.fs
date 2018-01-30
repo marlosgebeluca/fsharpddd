@@ -7,18 +7,22 @@ module ApoliceService =
 
   let repository = ApoliceRepository()
 
-  let findEndossos = 
-    let retorno = (repository :> IApoliceRepository).FindEndossos
+  let findEndossosApolice id = 
+    let retorno = (repository :> IApoliceRepository).FindEndossos id
     retorno
 
   let find : BuscarApolices =
     let retorno = (repository :> IApoliceRepository).FindApolice
+
+    for r in retorno do 
+      r.Endossos <- findEndossosApolice(r.NumProposta|>int)
+      
     retorno
 
   let findOne id : BuscarApolice =
     let retorno = (repository :> IApoliceRepository).FindOneApolice id
+    retorno.Endossos <- findEndossosApolice id
 
-    retorno.Endossos <- findEndossos
     retorno
 
   let create : CreateApolice = 
@@ -26,27 +30,26 @@ module ApoliceService =
       let retorno = (repository :> IApoliceRepository).CreateApolice(entidade)
       retorno
 
-  let update id entidade: UpdateApolice =
-    fun _atualizarApolice ->
-      let retorno = (repository :> IApoliceRepository).UpdateApolice(id, entidade)
-      entidade
+  let update id entidade : AtualizarApolice =
+    let retorno = (repository :> IApoliceRepository).UpdateApolice(id, entidade)
+    retorno.Endossos <- findEndossosApolice id
 
-  let delete : DeleteApolice =
-    fun deletarApolice id ->
-      "Deletado " + id.ToString()
+    retorno
 
-  
+  let delete id : DeletarApolice =
+    let retorno = (repository :> IApoliceRepository).DeleteApolice(id)
+    retorno
 
   let renovarApolice: RenovarApolice  =
     fun __ numeroDaApolice ->
       let n = numeroDaApolice |> NumeroDaApolice
       let a = "123456" |> String30 |> ApoliceDoc
-      let t =  "AP" |> String02 |> TipoMovto
+      let t =  "AP" |> String02 |> TipoMovtoApolice
 
       let apolice: ApoliceEntity = {
         NumProposta = n;
         TipoMovto = t;
         ApoliceDoc = a;
-        Endossos = [];   
+        Endossos = new List<int>();   
       }
       apolice

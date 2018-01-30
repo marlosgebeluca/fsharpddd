@@ -5,9 +5,10 @@ open Domain.Apolice
 
 module ApoliceService = 
 
-  let find : Find =
+  let find : FindApolice =
     let lista = find
     let apolices = new List<ApoliceDTO>()
+    
     for i in lista do
       let entidade = ApoliceAdapter.entityToDTO i
       apolices.Add(entidade)
@@ -17,7 +18,7 @@ module ApoliceService =
   let findOne id : FindOneApolice =
     let entidade = findOne id
     let retorno = ApoliceAdapter.entityToDTO entidade
-
+    
     fun _buscarUmaApolice ->
       retorno
     
@@ -27,18 +28,22 @@ module ApoliceService =
     let apoliceRetornoDomain = 
       entidade
       |> create entidade
-
     let retorno = ApoliceAdapter.entityToDTO apoliceRetornoDomain
+    
     fun _cadastrarApolice ->
       retorno
 
   let update(id, apoliceDto) : UpdateApolice =
     let __validar = ApoliceValidator.validar apoliceDto
     let entidade = ApoliceAdapter.dtoToEntity apoliceDto
-   
-    let apoliceAtualziadaDomain = update(id,entidade)
-
-    // let retorno = ApoliceAdapter.entityToDTO apoliceAtualziadaDomain
+    let apoliceAtualziadaDomain = update id entidade
+    let retorno = ApoliceAdapter.entityToDTO apoliceAtualziadaDomain
 
     fun _atualizarApolice ->
-      apoliceDto
+      retorno
+
+  let delete(id) : DeleteApolice =
+    let retorno = delete id
+    
+    fun _deletarApolice ->
+      retorno

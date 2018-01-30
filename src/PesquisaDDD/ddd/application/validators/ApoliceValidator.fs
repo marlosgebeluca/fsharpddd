@@ -5,7 +5,7 @@ open Domain.Apolice
 
 module ApoliceValidator =
   let validar(apolice:ApoliceDTO) =
-    let tipoMovto = TipoMovto.create apolice.TipoMovto  
+    let tipoMovto = TipoMovtoApolice.create apolice.TipoMovto  
     let apoliceDoc = String30.create apolice.ApoliceDoc
 
     match tipoMovto with

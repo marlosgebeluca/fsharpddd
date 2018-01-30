@@ -40,3 +40,5 @@ type DeletarEndosso =
   Deletar 
     -> int
     -> string
+
+type BuscarEndossosDaApolice = List<int>  
